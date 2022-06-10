@@ -1,26 +1,25 @@
-test = function ( check , max) {
 
-  if ( check <= max) {
+randomInteger = (min, max) => {
+ 
+  if (max < min) {
+  return Math.floor(Math.random() * (min - max + 1)) + max;
+  } else if ( min == max) {
+   return max ;
+  } else {
+   return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+};
+
+randomInteger(100 , 2);
+
+
+lineLengthTest = (check, max) =>{
+ 
+  if (check <= max) {
    return true 
   } else { 
    return false
   } 
 };
 
-test ( 300 , 200);
-
-
-
-
-test2 = function ( min , max) {
- 
-  if ( max < min) {
-  return Math.floor(Math.random() * min);
-  }else if ( min == max) {
-   return max ;
-  }else {
-   return Math.floor(Math.random() * max);
-  }
-};
-
-test2 ( 100 , 2);
+lineLengthTest(100, 200);
