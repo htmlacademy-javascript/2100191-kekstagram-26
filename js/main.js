@@ -36,6 +36,7 @@ const getRandomArrayElement = (elements) => {
 };
 //Создание массива комментариев
 const createCommentObject = (id) => {
+  id++
   return {
     id,
     avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
@@ -47,6 +48,7 @@ const createCommentObject = (id) => {
 const createComment = () => Array.from({length: 5}, (_, id) => createCommentObject(id))
 //Создание основного массива//
 const createPhotoObject = (id) => {
+  id++
   return {
     id,
     url: id,
