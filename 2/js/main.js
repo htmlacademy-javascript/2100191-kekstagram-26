@@ -23,8 +23,6 @@ const NAMES = [
   'Дана',
 ];
 const PHOTO_OBJECT_COUNT = 25;
-//Число от 1 до 25
-
 //Случайное число
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -39,28 +37,31 @@ const getRandomArrayElement = (elements) => {
 //Создание массива комментариев
 const createCommentObject = () => {
   return {
-    id: getRandomPositiveInteger('0','600'),
-    avatar: 'img/avatar-' + getRandomPositiveInteger('1','6') + '.svg',
+    id: getRandomPositiveInteger(0, 600),
+    avatar: 'img/avatar-' + getRandomPositiveInteger(1, 6) + '.svg',
     message: getRandomArrayElement(MESSAGE_TEXT),
     name: getRandomArrayElement(NAMES),
   };
 }; 
 
-const commentObjects = Array.from({length: 1}, createCommentObject);
+const commentObjects = () =>{  
+  let comment = Array.from({length: 1}, createCommentObject);
+  return comment;
+}
 //Создание основного массива//
 const createPhotoObject = () => {
   return {
-    //id:,
-    //url:,
+    id: getRandomPositiveInteger(1, 25),
+    url: getRandomPositiveInteger(1, 25),
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomPositiveInteger('15','200'),
-    //comments: commentObjects,
+    likes: getRandomPositiveInteger(15, 200),
+    comments: commentObjects(),
   };
 }; 
 
- const photoObjects = Array.from({length: PHOTO_OBJECT_COUNT}, createPhotoObject);
-
-//console.log(commentObjects);
-
-//console.log(photoObjects);
+const photoObjects = () =>{
+ let photo = Array.from({length: PHOTO_OBJECT_COUNT}, createPhotoObject);
+ return photo;
+};
+//console.log(photoObjects());
 
