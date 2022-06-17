@@ -44,7 +44,10 @@ const createCommentObject = () => {
   };
 }; 
 
-const commentObjects = Array.from({length: 1}, createCommentObject);
+const commentObjects = () =>{  
+  let comment = Array.from({length: 1}, createCommentObject);
+  return comment;
+}
 //Создание основного массива//
 const createPhotoObject = () => {
   return {
@@ -52,11 +55,13 @@ const createPhotoObject = () => {
     url: getRandomPositiveInteger(1, 25),
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomPositiveInteger(15, 200),
-    //comments: commentObjects,
+    comments: commentObjects(),
   };
 }; 
 
- const photoObjects = Array.from({length: PHOTO_OBJECT_COUNT}, createPhotoObject);
-
-//console.log(photoObjects);
+const photoObjects = () =>{
+ let photo = Array.from({length: PHOTO_OBJECT_COUNT}, createPhotoObject);
+ return photo;
+};
+//console.log(photoObjects());
 
