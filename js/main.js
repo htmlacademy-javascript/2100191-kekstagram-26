@@ -1,3 +1,4 @@
+<<<<<<< module4-task1
 const DESCRIPTION = [
   'Описание 1',
   'Описание 2',
@@ -87,8 +88,5 @@ lineLengthTest = (check, max) =>{
 };
 
 lineLengthTest(100, 200);
-
-
-
-
+>>>>>>> master
 
