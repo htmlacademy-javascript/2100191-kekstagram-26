@@ -61,9 +61,7 @@ const createPhotos = () => Array.from({length: PHOTO_OBJECT_COUNT}, (_, id) => c
 
 console.log(createPhotos()); 
 
-=======
-
-randomInteger = (min, max) => {
+const randomInteger = (min, max) => {
  
   if (max < min) {
   return Math.floor(Math.random() * (min - max + 1)) + max;
@@ -77,7 +75,7 @@ randomInteger = (min, max) => {
 randomInteger(100 , 2);
 
 
-lineLengthTest = (check, max) =>{
+const lineLengthTest = (check, max) =>{
  
   if (check <= max) {
    return true 
