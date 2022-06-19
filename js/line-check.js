@@ -1,4 +1,4 @@
-function lineLengthTest (string, length) {
+const function lineLengthTest (string, length) {
   return string.length <= length;
 }
 
