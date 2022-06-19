@@ -1,10 +1,5 @@
-const lineLengthTest = (check, max) =>{
- 
-  if (check <= max) {
-   return true 
-  } else { 
-   return false
-  } 
-};
+function lineLengthTest (string, length) {
+  return string.length <= length;
+}
 
 lineLengthTest(100, 200);
