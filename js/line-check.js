@@ -3,5 +3,3 @@ const lineLengthTest = (string, length) =>{
 };
 
 lineLengthTest(100, 200);
-
-const lineLengthTest = (check, max) =>
