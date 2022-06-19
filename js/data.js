@@ -26,16 +26,15 @@ const NAMES = [
 ];
 const PHOTO_OBJECT_COUNT = 25;
 //Создание массива комментариев
-const createCommentObject = (id) => {
-  return {
+const createCommentObject = (id) => ({
     id,
     avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
     message: getRandomArrayElement(MESSAGE_TEXT),
     name: getRandomArrayElement(NAMES),
-  };
-};
+});
 
 const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1))
+
 //Создание основного массива//
 const createPhotoObject = (id) => {
   return {
