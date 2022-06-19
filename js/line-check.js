@@ -1,3 +1,3 @@
-const lineLengthTest = (string, length) => return string.length <= length;
+const lineLengthTest = (string, length) => string.length <= length;
 
 lineLengthTest(100, 200);
