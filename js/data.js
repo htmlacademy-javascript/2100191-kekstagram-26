@@ -1,3 +1,4 @@
+import getRandomArrayElement from './util.js';                                                   
 const DESCRIPTION = [
   'Описание 1',
   'Описание 2',
