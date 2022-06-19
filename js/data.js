@@ -34,7 +34,6 @@ const createCommentObject = (id) => ({
 });
 
 const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1))
-
 //Создание основного массива//
 const createPhotoObject = (id) => {
   return {
