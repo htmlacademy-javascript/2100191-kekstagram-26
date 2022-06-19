@@ -33,9 +33,9 @@ const createCommentObject = (id) => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1))
+const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1));
 //Создание основного массива//
-const createPhotoObject = (id) => {
+const createPhotoObject = (id) => ({
   return {
     id,
     url: `photos/${id}.jpg`,
@@ -43,9 +43,9 @@ const createPhotoObject = (id) => {
     likes: getRandomPositiveInteger(15,200),
     comments: createComments(),
   };
-}; 
+}); 
 
-const createPhotos = () => Array.from({length: PHOTO_OBJECT_COUNT}, (_, id) => createPhotoObject(id+1))
+const createPhotos = () => Array.from({length: PHOTO_OBJECT_COUNT}, (_, id) => createPhotoObject(id+1));
 
 console.log(createPhotos());
 export {createPhotos};
