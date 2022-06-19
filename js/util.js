@@ -10,3 +10,4 @@ const getRandomArrayElement = (elements) => {
 };
 
 export {getRandomArrayElement};
+export {getRandomPositiveInteger};
