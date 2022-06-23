@@ -2,8 +2,8 @@ import {createPhotos} from './data.js';
 
 const pictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture')
- .content
- .querySelector('.picture');
+  .content
+  .querySelector('.picture');
 
 const photoObj = createPhotos();
 
