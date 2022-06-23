@@ -1,6 +1,6 @@
 import {createPhotos} from './data.js';
 
-const pictures = userDialog.querySelector('.pictures');
+const pictures = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture')
 .content
 .querySelector('.picture');
