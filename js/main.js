@@ -1,3 +1,1 @@
-import {CreatePhotos} from './data.js';
-
-console.log(CreatePhotos());
+import './random_user_image.js';
