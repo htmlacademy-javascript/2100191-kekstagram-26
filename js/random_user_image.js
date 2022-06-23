@@ -17,4 +17,4 @@ photoObj.forEach(({url, likes, comments}) => {
   similarListFragment.appendChild(picture);
 });
 
-similarListElement.appendChild(similarListFragment);
+pictures.appendChild(similarListFragment);
