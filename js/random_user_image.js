@@ -1,20 +1,22 @@
-import {createPhotos} from './data.js';
+const picturesElement = document.querySelector('.pictures');
+const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
 
-const pictures = document.querySelector('.pictures');
-const templateFragment = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
-
-const photoObj = createPhotos();
-
-const similarListFragment = document.createDocumentFragment();
-
-photoObj.forEach(({url, likes, comments}) => {
+const makePhotoElement = ({url, likes, comments}) => {
   const picture = templateFragment.cloneNode(true);
-  picture.querySelector('.picture__img').src = url;
+  picture.querySelector('.picture__img').setAttribute('src', url);
   picture.querySelector('.picture__likes').textContent = likes;
   picture.querySelector('.picture__comments').textContent = comments.length;
-  similarListFragment.appendChild(picture);
-});
 
-pictures.appendChild(similarListFragment);
+  // и вот тут в следующем задании про открытие big picture надо будет добавить слушатель click
+
+  return picture;
+};
+
+const renderPhotos = (photos) => {
+  const similarListFragment = document.createDocumentFragment();
+
+  photos.forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
+
+  picturesElement.appendChild(similarListFragment);
+};
+export {renderPhotos};
