@@ -1,4 +1,4 @@
-import {getRandomArrayElement} from './util.js';  
+import {getRandomArrayElement} from './util.js';
 import {getRandomPositiveInteger} from './util.js';
 const DESCRIPTION = [
   'Описание 1',
@@ -36,14 +36,12 @@ const createCommentObject = (id) => ({
 const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1));
 //Создание основного массива//
 const createPhotoObject = (id) => ({
-  return {
-    id,
-    url: `photos/${id}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomPositiveInteger(15,200),
-    comments: createComments(),
-  };
-}); 
+  id,
+  url: `photos/${id}.jpg`,
+  description: getRandomArrayElement(DESCRIPTION),
+  likes: getRandomPositiveInteger(15,200),
+  comments: createComments(),
+});
 
 const createPhotos = () => Array.from({length: PHOTO_OBJECT_COUNT}, (_, id) => createPhotoObject(id+1));
 
