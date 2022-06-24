@@ -1,5 +1,5 @@
-import getRandomArrayElement from './util.js';  
-import getRandomPositiveInteger from './util.js';
+import {getRandomArrayElement} from './util.js';  
+import {getRandomPositiveInteger} from './util.js';
 const DESCRIPTION = [
   'Описание 1',
   'Описание 2',
