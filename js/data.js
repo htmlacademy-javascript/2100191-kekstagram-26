@@ -47,5 +47,4 @@ const createPhotoObject = (id) => ({
 
 const createPhotos = () => Array.from({length: PHOTO_OBJECT_COUNT}, (_, id) => createPhotoObject(id+1));
 
-console.log(createPhotos());
 export {createPhotos};
