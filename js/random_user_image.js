@@ -6,9 +6,8 @@ const makePhotoElement = ({url, likes, comments}) => {
   picture.querySelector('.picture__img').setAttribute('src', url);
   picture.querySelector('.picture__likes').textContent = likes;
   picture.querySelector('.picture__comments').textContent = comments.length;
-
   // и вот тут в следующем задании про открытие big picture надо будет добавить слушатель click
-
+  //picture.querySelector('.picture__img').addEventListener('click', function())
   return picture;
 };
 
