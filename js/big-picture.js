@@ -13,6 +13,16 @@ const makeComment = ({avatar, name, message}) => {
 
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      fullScreen.classList.add('hidden');
+      fullScreen.querySelector('.social__comment-count').removeClass('hidden');
+      fullScreen.querySelector('.comments-loader').removeClass('hidden');
+      body.removeClass('modal-open');
+    }
+  });
+
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
   fullScreen.querySelector('.comments-count').textContent = comments.lenght;
