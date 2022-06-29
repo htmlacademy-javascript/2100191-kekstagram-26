@@ -12,6 +12,7 @@ const makeComment = ({avatar, name, message}) => {
 };
 
 const showBigPicture = ({url, likes, comments, description}) => {
+  commentList.innerHTML = '';
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
   fullScreen.querySelector('.comments-count').textContent = comments.lenght;
