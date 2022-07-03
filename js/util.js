@@ -5,7 +5,11 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getRandomArrayElement = (elements) =>elements[getRandomPositiveInteger(0, elements.length - 1)];
+
+const lineLengthTest = (string, length) => string.length <= length;
+
 
 export {getRandomArrayElement};
 export {getRandomPositiveInteger};
+export {lineLengthTest};
