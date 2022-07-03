@@ -30,7 +30,4 @@ const closeUplFile = () =>{
   });
 };
 
-
-export {closeBP};
-export {openPhotoEdit};
-export {closeUplFile};
+export {closeBP , openPhotoEdit, closeUplFile};
