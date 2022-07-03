@@ -3,18 +3,18 @@ const Uploadform = document.querySelector('.img-upload__form');
 const minComLenght = 5;
 const maxComLenght = 140;
 const space = ' ';
-const mySet = new Set();
 
 const validateHashTag=(val)=>{
   const array = val.split(space);
   const arrayTest = array.every((value) => re.test(value));
   const arrayLenght = array.length <= 5;
 
-  array.forEach((value)=>{
-    mySet.add(value);
-  });
+  const isDuplicate = (aray) => {
+    const s = new Set(aray);
+    return s.size === aray.length;
+  };
 
-  if(arrayTest && arrayLenght){return true;}
+  if(arrayTest && arrayLenght && isDuplicate(array)){return true;}
 };
 
 const validateComment =(value)=>value.length >= minComLenght && value.length <= maxComLenght;
@@ -31,13 +31,13 @@ const pristine = new Pristine(Uploadform, {
 pristine.addValidator(
   Uploadform.querySelector('#text_hashtags'),
   validateHashTag,
-  'Неправильный формат хэш-тега'
+  'Недопустимый формат хэш-тега'
 );
 
 pristine.addValidator(
   Uploadform.querySelector('#text_description'),
   validateComment,
-  'От 5 до 140 символов'
+  'Комментарий должен содержать от 5 до 140 символов'
 );
 
 
