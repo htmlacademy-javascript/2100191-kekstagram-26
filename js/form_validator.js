@@ -1,5 +1,17 @@
 const re = /^#[A-Za-zA-Яа-яЁё0-9]{1,20}$/;
 const Uploadform = document.querySelector('.img-upload__form');
+const minComLenght = 5;
+const maxComLenght = 140;
+const space = ' ';
+
+const validateHashTag=(val)=>{
+  const array = val.split(space);
+  const arrayTest = array.every((value) => re.test(value));
+  const arrayLenght = array.length <= 5;
+  if(arrayTest && arrayLenght ){return true;}
+};
+
+const validateComment =(value)=>value.length >= minComLenght && value.length <= maxComLenght;
 
 const pristine = new Pristine(Uploadform, {
   classTo: 'img-upload__text',
@@ -10,21 +22,16 @@ const pristine = new Pristine(Uploadform, {
   errorTextClass: 'form__error',
 });
 
-const validateHashTag =(value)=>re.test(value);
-
 pristine.addValidator(
   Uploadform.querySelector('#text_hashtags'),
   validateHashTag,
-  'ошибка'
+  'Неправильный формат хэш-тега'
 );
-
-
-const validateComment =(value)=>value.length >= 5 && value.length <= 140;
 
 pristine.addValidator(
   Uploadform.querySelector('#text_description'),
   validateComment,
-  'От 4 до 140 символов'
+  'От 5 до 140 символов'
 );
 
 
