@@ -5,6 +5,15 @@ const closeBigPicture = document.querySelector('#picture-cancel');
 const uplFile = document.querySelector('#upload-file');
 const closeFileUpload = document.querySelector('.img-upload__cancel');
 
+const BpButton = (e)=> {
+  if (e.key === 'Escape') {
+    fullScreen.classList.add('hidden');
+    fullScreen.querySelector('.social__comment-count').removeClass('hidden');
+    fullScreen.querySelector('.comments-loader').removeClass('hidden');
+    body.removeClass('modal-open');
+  }
+};
+
 //полноэкранный режим
 const closeBP = () =>{
   closeBigPicture.addEventListener('click', ()=> {
