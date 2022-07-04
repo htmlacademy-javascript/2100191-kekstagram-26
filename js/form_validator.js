@@ -16,7 +16,7 @@ const validateHashTag = (val) => {
   return arrayTest === arrayLenght === isDuplicate(array);
 };
 
-const validateComment = value.length <= maxComLenght;
+const validateComment = (value) => value.length <= maxComLenght;
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__text',
