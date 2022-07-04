@@ -3,7 +3,7 @@ const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const body = document.querySelector('body');
 
-const bigPictureButton = (e)=> {
+const higeBigPictureButton = (e)=> {
   if (e.key === 'Escape') {
     fullScreen.classList.add('hidden');
     fullScreen.querySelector('.social__comment-count').removeClass('hidden');
@@ -39,4 +39,4 @@ const showBigPicture = ({url, likes, comments, description}) => {
 };
 
 export {showBigPicture};
-export {bigPictureButton};
+export {hideBigPictureButton};
