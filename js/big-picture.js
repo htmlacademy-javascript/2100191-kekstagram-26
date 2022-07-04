@@ -3,6 +3,15 @@ const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const body = document.querySelector('body');
 
+const hideBigPictureButton = (e)=> {
+  if (e.key === 'Escape') {
+    fullScreen.classList.add('hidden');
+    fullScreen.querySelector('.social__comment-count').removeClass('hidden');
+    fullScreen.querySelector('.comments-loader').removeClass('hidden');
+    body.removeClass('modal-open');
+  }
+};
+
 const makeComment = ({avatar, name, message}) => {
   const socialComment = commentTemplate.cloneNode(true);
   socialComment.querySelector('.social__picture').setAttribute('src', avatar);
@@ -13,6 +22,9 @@ const makeComment = ({avatar, name, message}) => {
 
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
+
+  document.addEventListener('keydown', hideBigPictureButton);
+
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
   fullScreen.querySelector('.comments-count').textContent = comments.lenght;
@@ -27,3 +39,4 @@ const showBigPicture = ({url, likes, comments, description}) => {
 };
 
 export {showBigPicture};
+export {hideBigPictureButton};
