@@ -13,17 +13,14 @@ const BpButton = (e)=> {
     body.removeClass('modal-open');
   }
 };
-
 //полноэкранный режим
 const closeBP = () =>{
   closeBigPicture.addEventListener('click', ()=> {
-    const Function = ()=>{};
     fullScreen.classList.add('hidden');
     body.classList.remove('modal-open');
-    document.removeEventListener('keydown', Function);
+    document.removeEventListener('keydown', BpButton);
   });
 };
-
 //загрузка фото и его настройка
 const openPhotoEdit = () =>{
   uplFile.addEventListener('change', () => {
