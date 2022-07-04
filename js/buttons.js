@@ -1,3 +1,5 @@
+import { bigPictureButton } from './big-picture.js';
+
 const body = document.querySelector('body');
 const fullScreen = document.querySelector('.big-picture');
 const photoEdit = document.querySelector('.img-upload__overlay');
@@ -5,14 +7,6 @@ const pictureCancel = document.querySelector('#picture-cancel');
 const uplFile = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('.img-upload__cancel');
 
-const bigPictureButton = (e)=> {
-  if (e.key === 'Escape') {
-    fullScreen.classList.add('hidden');
-    fullScreen.querySelector('.social__comment-count').removeClass('hidden');
-    fullScreen.querySelector('.comments-loader').removeClass('hidden');
-    body.removeClass('modal-open');
-  }
-};
 //полноэкранный режим
 const closeBigPicture = () =>{
   pictureCancel.addEventListener('click', ()=> {
