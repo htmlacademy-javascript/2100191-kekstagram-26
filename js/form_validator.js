@@ -3,21 +3,20 @@ const uploadForm = document.querySelector('.img-upload__form');
 const maxComLenght = 140;
 const space =  /\s+/;
 
-const validateHashTag = (val) => {
-  const array = val.split(space);
-  const arrayTest = array.every((value) => re.test(value));
-  const arrayLenght = array.length <= 5;
-  const newArray = array.map((newArra) => newArra.toLowerCase());
-
-  const isDuplicate = (aray) => {
+const isDuplicate = (aray) => {
     const s = new Set(aray);
     return s.size === aray.length;
   };
 
-  return arrayTest === arrayLenght === isDuplicate(newArray);
+const validateHashTag = (val) => {
+  const array = val.trim().toLowerCase().split(space);
+  const arrayTest = array.every((value) => re.test(value));
+  const arrayLenght = array.length <= 5;
+
+  return arrayTest === arrayLenght === isDuplicate(array);
 };
 
-const validateComment = (value) => value === ' ' || value.length <= maxComLenght;
+const validateComment = value.length <= maxComLenght;
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__text',
