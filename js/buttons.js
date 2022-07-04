@@ -1,11 +1,11 @@
 const body = document.querySelector('body');
 const fullScreen = document.querySelector('.big-picture');
 const photoEdit = document.querySelector('.img-upload__overlay');
-const closeBigPicture = document.querySelector('#picture-cancel');
+const pictureCancel = document.querySelector('#picture-cancel');
 const uplFile = document.querySelector('#upload-file');
-const closeFileUpload = document.querySelector('.img-upload__cancel');
+const uploadCancel = document.querySelector('.img-upload__cancel');
 
-const BpButton = (e)=> {
+const bigPictureButton = (e)=> {
   if (e.key === 'Escape') {
     fullScreen.classList.add('hidden');
     fullScreen.querySelector('.social__comment-count').removeClass('hidden');
@@ -14,13 +14,14 @@ const BpButton = (e)=> {
   }
 };
 //полноэкранный режим
-const closeBP = () =>{
-  closeBigPicture.addEventListener('click', ()=> {
+const closeBigPicture = () =>{
+  pictureCancel.addEventListener('click', ()=> {
     fullScreen.classList.add('hidden');
     body.classList.remove('modal-open');
-    document.removeEventListener('keydown', BpButton);
+    document.removeEventListener('keydown', bigPictureButton);
   });
 };
+
 //загрузка фото и его настройка
 const openPhotoEdit = () =>{
   uplFile.addEventListener('change', () => {
@@ -28,12 +29,12 @@ const openPhotoEdit = () =>{
     body.classList.add('modal-open');
   });
 };
-const closeUplFile = () =>{
-  closeFileUpload.addEventListener('click', ()=> {
+const closeFileUpload = () =>{
+  uploadCancel.addEventListener('click', ()=> {
     uplFile.innerHTML = '';
     photoEdit.classList.add('hidden');
     body.classList.remove('modal-open');
   });
 };
 
-export {closeBP , openPhotoEdit, closeUplFile};
+export {closeBigPicture , openPhotoEdit, closeFileUpload};
