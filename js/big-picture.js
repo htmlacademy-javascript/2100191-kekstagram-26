@@ -39,3 +39,4 @@ const showBigPicture = ({url, likes, comments, description}) => {
 };
 
 export {showBigPicture};
+export {bigPictureButton};
