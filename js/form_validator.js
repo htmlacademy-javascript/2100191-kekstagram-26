@@ -4,9 +4,9 @@ const maxComLenght = 140;
 const space =  /\s+/;
 
 const isDuplicate = (aray) => {
-    const s = new Set(aray);
-    return s.size === aray.length;
-  };
+  const s = new Set(aray);
+  return s.size === aray.length;
+};;
 
 const validateHashTag = (val) => {
   const array = val.trim().toLowerCase().split(space);
