@@ -23,7 +23,7 @@ const makeComment = ({avatar, name, message}) => {
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
 
-  document.addEventListener('keydown', bigPictureButton);
+  document.addEventListener('keydown', hideBigPictureButton);
 
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
