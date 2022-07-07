@@ -36,7 +36,6 @@ const showBigPicture = ({url, likes, comments, description}) => {
   for(let i = 0; i <= 4; i++){
     comList[i].classList.remove('hidden');
   }
-  
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
