@@ -16,7 +16,8 @@ const closeBigPicture = () => {
     startCommentsLenght = 5;
     loadMore.classList.remove('hidden');
     fullScreen.classList.add('hidden');
-    shownCommentsCount.innerHTML = '5 из 15 комментариев';
+    const maxComments = document.querySelectorAll('.social__comment').length;
+    shownCommentsCount.innerHTML = `${startCommentsLenght} из ${maxComments} комментариев`;
     body.classList.remove('modal-open');
     document.removeEventListener('keydown', hideBigPictureButton);
   });
@@ -46,9 +47,10 @@ const loadMorePictures = () => {
 
     visComments.forEach((el) => el.classList.remove('hidden'));
 
-    shownCommentsCount.textContent = `${startCommentsLenght} из 15 комментариев`;
+    const maxComments = document.querySelectorAll('.social__comment').length;
+    shownCommentsCount.textContent = `${startCommentsLenght} из ${maxComments} комментариев`;
 
-    if (startCommentsLenght === 15) {
+    if (startCommentsLenght === maxComments) {
       loadMore.classList.add('hidden');
     }
   });
