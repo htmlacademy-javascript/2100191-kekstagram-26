@@ -23,20 +23,24 @@ const makeComment = ({avatar, name, message}) => {
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
 
-  document.addEventListener('keydown', hideBigPictureButton);
+  document.addEventListener('keydown', bigPictureButton);
 
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
-  fullScreen.querySelector('.comments-count').textContent = comments.lenght;
+  //fullScreen.querySelector('.comments-count').textContent = comments.lenght;
   fullScreen.querySelector('.social__caption').textContent = description;
 
   commentList.append(...comments.map(makeComment));
 
-  fullScreen.querySelector('.social__comment-count').classList.add('hidden');
-  fullScreen.querySelector('.comments-loader').classList.add('hidden');
+  const comList = commentList.childNodes;
+
+  for(let i = 0; i <= 4; i++){
+    comList[i].classList.remove('hidden');
+  }
+
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
 
 export {showBigPicture};
-export {hideBigPictureButton};
+export {bigPictureButton};
