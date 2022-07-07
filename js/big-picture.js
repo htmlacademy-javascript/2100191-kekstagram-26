@@ -2,6 +2,7 @@ const fullScreen = document.querySelector('.big-picture');
 const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const body = document.querySelector('body');
+const comList = commentList.childNodes;
 
 const hideBigPictureButton = (e)=> {
   if (e.key === 'Escape') {
@@ -29,15 +30,13 @@ const showBigPicture = ({url, likes, comments, description}) => {
   fullScreen.querySelector('.likes-count').textContent = likes;
   //fullScreen.querySelector('.comments-count').textContent = comments.lenght;
   fullScreen.querySelector('.social__caption').textContent = description;
-
+  
   commentList.append(...comments.map(makeComment));
-
-  const comList = commentList.childNodes;
-
+  
   for(let i = 0; i <= 4; i++){
     comList[i].classList.remove('hidden');
   }
-
+  
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
