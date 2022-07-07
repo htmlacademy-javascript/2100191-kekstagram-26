@@ -1,4 +1,4 @@
-import {bigPictureButton} from './big-picture.js';
+import {hideBigPictureButton} from './big-picture.js';
 
 const body = document.querySelector('body');
 const fullScreen = document.querySelector('.big-picture');
@@ -18,7 +18,7 @@ const closeBigPicture = () => {
     fullScreen.classList.add('hidden');
     shownCommentsCount.innerHTML = '5 из 15 комментариев';
     body.classList.remove('modal-open');
-    document.removeEventListener('keydown', bigPictureButton);
+    document.removeEventListener('keydown', hideBigPictureButton);
   });
 };
 
