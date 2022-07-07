@@ -24,15 +24,15 @@ const makeComment = ({avatar, name, message}) => {
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
 
-  document.addEventListener('keydown', bigPictureButton);
+  document.addEventListener('keydown', hideBigPictureButton);
 
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
   //fullScreen.querySelector('.comments-count').textContent = comments.lenght;
   fullScreen.querySelector('.social__caption').textContent = description;
-  
+
   commentList.append(...comments.map(makeComment));
-  
+
   for(let i = 0; i <= 4; i++){
     comList[i].classList.remove('hidden');
   }
