@@ -14,9 +14,6 @@ let startCommentsLength = 5;
 //полноэкранный режим
 const closeBigPicture = () => {
   pictureCancel.addEventListener('click', () => {
-    startCommentsLength = 5;
-    loadMore.classList.remove('hidden');
-    newText.textContent = `${startCommentsLength  } из `;
     hideBigPictureButton();
     document.removeEventListener('keydown', onCloseBigPicture);
   });
@@ -50,6 +47,7 @@ const loadMorePictures = () =>{
 
     if (startCommentsLength >= maxComments) {
       loadMore.classList.add('hidden');
+      startCommentsLength = 5;
     }
   });
 };
