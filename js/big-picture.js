@@ -2,13 +2,21 @@ const fullScreen = document.querySelector('.big-picture');
 const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const body = document.querySelector('body');
+const comList = commentList.childNodes;
 
-const hideBigPictureButton = (e)=> {
+const loadMore = document.querySelector('.comments-loader');
+const shownCommentsCount = document.querySelector('.social__comment-count');
+const newText = shownCommentsCount.childNodes[0];
+
+const hideBigPictureButton = ()=> {
+  loadMore.classList.remove('hidden');
+  fullScreen.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
+
+const onCloseBigPicture = (e) => {
   if (e.key === 'Escape') {
-    fullScreen.classList.add('hidden');
-    fullScreen.querySelector('.social__comment-count').removeClass('hidden');
-    fullScreen.querySelector('.comments-loader').removeClass('hidden');
-    body.removeClass('modal-open');
+    hideBigPictureButton();
   }
 };
 
@@ -17,26 +25,35 @@ const makeComment = ({avatar, name, message}) => {
   socialComment.querySelector('.social__picture').setAttribute('src', avatar);
   socialComment.querySelector('.social__picture').setAttribute('alt', name);
   socialComment.querySelector('.social__text').textContent = message;
+  socialComment.classList.add('hidden');
+
   return socialComment;
 };
 
 const showBigPicture = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
-
-  document.addEventListener('keydown', hideBigPictureButton);
+  document.addEventListener('keydown', onCloseBigPicture);
 
   fullScreen.querySelector('.big-picture__img').firstElementChild.setAttribute('src', url);
   fullScreen.querySelector('.likes-count').textContent = likes;
-  fullScreen.querySelector('.comments-count').textContent = comments.lenght;
+  fullScreen.querySelector('.comments-count').textContent = comments.length;
   fullScreen.querySelector('.social__caption').textContent = description;
 
   commentList.append(...comments.map(makeComment));
 
-  fullScreen.querySelector('.social__comment-count').classList.add('hidden');
-  fullScreen.querySelector('.comments-loader').classList.add('hidden');
+  if (comList.length >= 5) {
+    for(let i = 0; i <= 4; i++){
+      comList[i].classList.remove('hidden');
+    }
+    newText.textContent = ' 5  из ';
+  } else {
+    comList.forEach((el) => el.classList.remove('hidden'));
+    newText.textContent = `${ comList.length } из `;
+    loadMore.classList.add('hidden');
+  }
+
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
 
-export {showBigPicture};
-export {hideBigPictureButton};
+export {showBigPicture, hideBigPictureButton, onCloseBigPicture};
