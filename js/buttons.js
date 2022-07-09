@@ -11,6 +11,17 @@ const shownCommentsCount = document.querySelector('.social__comment-count');
 const newText = shownCommentsCount.childNodes[0];
 let startCommentsLength = 5;
 
+const closePhotoUpload = ()=> {
+  imgUploadForm.reset();
+  photoEdit.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
+
+const onClosePhotoUpload = (e) => {
+  if (e.key === 'Escape') {
+    closePhotoUpload();
+  }
+};
 //полноэкранный режим
 const closeBigPicture = () => {
   pictureCancel.addEventListener('click', () => {
@@ -23,32 +34,39 @@ const openPhotoEdit = () =>{
   uplFile.addEventListener('change', () => {
     photoEdit.classList.remove('hidden');
     body.classList.add('modal-open');
+    document.addEventListener('keydown', onClosePhotoUpload);
   });
 };
 const closeFileUpload = () =>{
   uploadCancel.addEventListener('click', ()=> {
-    imgUploadForm.reset();
-    photoEdit.classList.add('hidden');
-    body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onClosePhotoUpload);
+    closePhotoUpload();
   });
 };
 //загрузить еще
 const loadMorePictures = () =>{
   loadMore.addEventListener('click', () => {
-    startCommentsLength += 5;
-    const array = Array.from(document.querySelectorAll('.social__comment'));
-    const visComments = array.slice(0, startCommentsLength);
-
-    visComments.forEach((el) => el.classList.remove('hidden'));
 
     const maxComments = document.querySelectorAll('.social__comment').length;
-
-    newText.textContent = `${startCommentsLength  } из `;
 
     if (startCommentsLength >= maxComments) {
       loadMore.classList.add('hidden');
       startCommentsLength = 5;
+    } else {
+      startCommentsLength += 5;
+      const array = Array.from(document.querySelectorAll('.social__comment'));
+      const visComments = array.slice(0, startCommentsLength);
+
+      visComments.forEach((el) => el.classList.remove('hidden'));
+
+      newText.textContent = `${visComments.length} из `;
+
+      if (startCommentsLength >= maxComments) {
+        loadMore.classList.add('hidden');
+        startCommentsLength = 5;
+      }
     }
+
   });
 };
 
