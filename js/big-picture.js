@@ -7,12 +7,9 @@ const comList = commentList.childNodes;
 const loadMore = document.querySelector('.comments-loader');
 const shownCommentsCount = document.querySelector('.social__comment-count');
 const newText = shownCommentsCount.childNodes[0];
-const startCommentsLength = 5;
 
 const hideBigPictureButton = ()=> {
   loadMore.classList.remove('hidden');
-  newText.textContent = `${startCommentsLength  } из `;
-
   fullScreen.classList.add('hidden');
   body.classList.remove('modal-open');
 };
@@ -44,8 +41,14 @@ const showBigPicture = ({url, likes, comments, description}) => {
 
   commentList.append(...comments.map(makeComment));
 
-  for(let i = 0; i <= 4; i++){
-    comList[i].classList.remove('hidden');
+  if (comList.length >= 5) {
+    for(let i = 0; i <= 4; i++){
+      comList[i].classList.remove('hidden');
+    }
+    newText.textContent = ' 5  из ';
+  } else {
+    comList.forEach((el) => el.classList.remove('hidden'));
+    newText.textContent = `${ comList.length } из `;
   }
 
   body.classList.add('modal-open');
