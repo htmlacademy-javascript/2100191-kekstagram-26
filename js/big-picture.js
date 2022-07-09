@@ -7,6 +7,7 @@ const comList = commentList.childNodes;
 const loadMore = document.querySelector('.comments-loader');
 const shownCommentsCount = document.querySelector('.social__comment-count');
 const newText = shownCommentsCount.childNodes[0];
+const commentsPerClick = 5;
 
 const hideBigPictureButton = ()=> {
   loadMore.classList.remove('hidden');
@@ -41,11 +42,10 @@ const showBigPicture = ({url, likes, comments, description}) => {
 
   commentList.append(...comments.map(makeComment));
 
-  if (comList.length >= 5) {
-    for(let i = 0; i <= 4; i++){
-      comList[i].classList.remove('hidden');
-    }
-    newText.textContent = ' 5  из ';
+  if (comList.length > commentsPerClick) {
+    const sliceComms = Array.from(document.querySelectorAll('.social__comment'));
+    sliceComms.slice(0, commentsPerClick).forEach((element) => element.classList.remove('hidden'));
+    newText.textContent = `${ commentsPerClick }  из `;
   } else {
     comList.forEach((el) => el.classList.remove('hidden'));
     newText.textContent = `${ comList.length } из `;
