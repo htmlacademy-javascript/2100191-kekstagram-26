@@ -49,6 +49,7 @@ const showBigPicture = ({url, likes, comments, description}) => {
   } else {
     comList.forEach((el) => el.classList.remove('hidden'));
     newText.textContent = `${ comList.length } из `;
+    loadMore.classList.add('hidden');
   }
 
   body.classList.add('modal-open');
