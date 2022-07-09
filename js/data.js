@@ -33,7 +33,7 @@ const createCommentObject = (id) => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const createComments = () => Array.from({length: 5}, (_, id) => createCommentObject(id+1));
+const createComments = () => Array.from({length: getRandomPositiveInteger(1, 16)}, (_, id) => createCommentObject(id+1));
 //Создание основного массива//
 const createPhotoObject = (id) => ({
   id,
