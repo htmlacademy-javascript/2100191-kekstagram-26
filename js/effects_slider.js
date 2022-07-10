@@ -21,7 +21,7 @@ sliderElement.noUiSlider.on('update', () => {
 //перемены
 
 
-const changeFilter = (evt) => {
+/*const changeFilter = (evt) => {
   if(evt.target.closest('#effect-none')){
     imgUploadPreview.className = 'img-upload__effects  effects';
     imgUploadPreview.classList.add('effects__preview--none');
