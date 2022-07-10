@@ -93,7 +93,7 @@ const photoScale =() => {
   uploadScale.addEventListener('click', smallerBigger);
 };
 //фильтры изображения
-/*const changeFilter = (evt) => {
+const changeFilter = (evt) => {
   if(evt.target.closest('#effect-none')){
     imgUploadPreview.className = 'img-upload__effects  effects';
     imgUploadPreview.classList.add('effects__preview--none');
@@ -123,5 +123,5 @@ const photoScale =() => {
 const changePhotoFilter = () => {
   changePhotoFilterForm.addEventListener('click', changeFilter);
 };
-*/
-export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale};
+
+export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale, changePhotoFilter};
