@@ -15,7 +15,7 @@ closeFileUpload();
 loadMorePictures();
 photoScale();
 changePhotoFilter();
-=======
+
 import './form_validator.js';
 import {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures} from './buttons.js';
 import {createPhotos} from './data.js';
