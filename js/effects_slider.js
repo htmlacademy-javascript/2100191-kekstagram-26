@@ -24,25 +24,38 @@ noUiSlider.create(sliderElement, {
   },
 });
 
+
+const effectSettings = {
+  chrome:{
+    filter: 'grayscale',
+    units: '',
+  },
+  sepia:{
+    filter: 'sepia',
+    units: '',
+  },
+  marvin:{
+    filter: 'invert',
+    units: '%',
+  },
+  phobos:{
+    filter: 'blur',
+    units: 'px',
+  },
+  heat:{
+    filter: 'brightness',
+    units: '',
+  },
+};
+
 sliderElement.noUiSlider.on('update', () => {
-  if(changePhotoFilterForm.closest('#effect-marvin')){
-    valueElement.value = sliderElement.noUiSlider.get();
-    imgUploadPreview.style.filter = `invert(${sliderElement.noUiSlider.get()}%)`;
-  }
-  if(changePhotoFilterForm.closest('#effect-phobos')){
-    valueElement.setAttribute('value', `${sliderElement.noUiSlider.get()}px`);
-  }
-  else{
-    valueElement.setAttribute('value', sliderElement.noUiSlider.get());
-    if(changePhotoFilterForm.closest('#effect-chrome')){
-      imgUploadPreview.style.filter = `grayscale(${sliderElement.noUiSlider.get()})`;
-    }
-    if(changePhotoFilterForm.closest('#effect-sepia')){
-      imgUploadPreview.style.filter = `sepia(${sliderElement.noUiSlider.get()})`;
-    }
-    if(changePhotoFilterForm.closest('#effect-heat')){
-      imgUploadPreview.style.filter = `brightness(${sliderElement.noUiSlider.get()})`;
-    }
+  const value = sliderElement.noUiSlider.get();
+  valueElement.setAttribute('value', value);
+  const selectedFilter = changePhotoFilterForm.querySelector('.effects__radio:checked').value;
+
+  const settings = effectSettings[selectedFilter];
+  if(settings) {
+    imgUploadPreview.style.filter = `${settings.filter}(${value}${settings.units})`;
   }
 });
 
@@ -62,7 +75,7 @@ const changeFilter = (evt) => {
         min: 0,
         max: 1
       },
-      start: 0.5,
+      start: 1,
       step: 0.1
     });
   }
@@ -73,7 +86,7 @@ const changeFilter = (evt) => {
         min: 0,
         max: 1
       },
-      start: 0.5,
+      start: 1,
       step: 0.1
     });
   }
@@ -84,7 +97,7 @@ const changeFilter = (evt) => {
         min: 0,
         max: 100
       },
-      start: 50,
+      start: 100,
       step: 1
     });
   }
@@ -95,7 +108,7 @@ const changeFilter = (evt) => {
         min: 0,
         max: 3
       },
-      start: 1.5,
+      start: 3,
       step: 0.1
     });
   }
@@ -106,7 +119,7 @@ const changeFilter = (evt) => {
         min: 1,
         max: 3
       },
-      start: 1.5,
+      start: 3,
       step: 0.1
     });
   }
