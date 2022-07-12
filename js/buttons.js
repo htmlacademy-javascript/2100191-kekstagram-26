@@ -13,12 +13,11 @@ let startCommentsLength = 5;
 const scaleControlValue = document.querySelector('.scale__control--value');
 const uploadScale = document.querySelector('.img-upload__scale');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
-
-//const changePhotoFilterForm = document.querySelector('.img-upload__effects');
+const sliderElement = document.querySelector('.effect-level__slider');
 
 const closePhotoUpload = ()=> {
   imgUploadForm.reset();
-  imgUploadPreview.className = 'img-upload__effects';
+  imgUploadPreview.className = 'img-upload__preview';
   scaleControlValue.setAttribute('value', '100%');
   imgUploadPreview.style.cssText = 'transform: scale(1)';
   photoEdit.classList.add('hidden');
@@ -42,6 +41,7 @@ const openPhotoEdit = () => {
   uplFile.addEventListener('change', () => {
     photoEdit.classList.remove('hidden');
     body.classList.add('modal-open');
+    sliderElement.classList.add('hidden');
     document.addEventListener('keydown', onClosePhotoUpload);
   });
 };
@@ -92,36 +92,5 @@ const smallerBigger = (evt) => {
 const photoScale =() => {
   uploadScale.addEventListener('click', smallerBigger);
 };
-//фильтры изображения
-const changeFilter = (evt) => {
-  if(evt.target.closest('#effect-none')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--none');
-  }
-  if(evt.target.closest('#effect-chrome')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--chrome');
-  }
-  if(evt.target.closest('#effect-sepia')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--sepia');
-  }
-  if(evt.target.closest('#effect-marvin')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--marvin');
-  }
-  if(evt.target.closest('#effect-phobos')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--phobos');
-  }
-  if(evt.target.closest('#effect-heat')){
-    imgUploadPreview.className = 'img-upload__effects  effects';
-    imgUploadPreview.classList.add('effects__preview--heat');
-  }
-};
 
-const changePhotoFilter = () => {
-  changePhotoFilterForm.addEventListener('click', changeFilter);
-};
-
-export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale, changePhotoFilter};
+export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale};
