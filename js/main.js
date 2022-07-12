@@ -1,6 +1,7 @@
 import './form_validator.js';
 import './effect_slider.js';
-import {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale, changePhotoFilter} from './buttons.js';
+import { changePhotoFilter } from './effect_slider.js';
+import {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale} from './buttons.js';
 import {createPhotos} from './data.js';
 import {renderPhotos} from './random_user_image.js';
 
