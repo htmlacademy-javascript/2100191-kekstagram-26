@@ -61,13 +61,13 @@ const smallerBigger = (evt) => {
   if (evt.target.closest('.scale__control--smaller')) {
     if (cleanValue > 25){
       scaleControlValue.setAttribute('value', `${Number(cleanValue) - 25}%`);
-      imgUploadPreview.style.cssText = `transform: scale( ${(Number(cleanValue) - 25)/100})`;
+      imgUploadPreview.style.transform = `scale( ${(Number(cleanValue) - 25)/100})`;
     }
   }
   if (evt.target.closest('.scale__control--bigger')) {
     if (cleanValue < 100){
       scaleControlValue.setAttribute('value', `${Number(cleanValue) + 25}%`);
-      imgUploadPreview.style.cssText = `transform: scale( ${(Number(cleanValue) + 25)/100})`;
+      imgUploadPreview.style.transform = `scale( ${(Number(cleanValue) + 25)/100})`;
     }
   }
 };
