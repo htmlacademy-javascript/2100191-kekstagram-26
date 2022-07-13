@@ -2,11 +2,11 @@ const fullScreen = document.querySelector('.big-picture');
 const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
 const body = document.querySelector('body');
-const comList = commentList.childNodes;
 
 const loadMore = document.querySelector('.comments-loader');
 const shownCommentsCount = document.querySelector('.social__comment-count');
 const newText = shownCommentsCount.childNodes[0];
+const commentsPerClick = 5;
 
 const hideBigPictureButton = ()=> {
   loadMore.classList.remove('hidden');
@@ -17,6 +17,20 @@ const hideBigPictureButton = ()=> {
 const onCloseBigPicture = (e) => {
   if (e.key === 'Escape') {
     hideBigPictureButton();
+  }
+};
+
+const showMoreComments = () => {
+  const hiddenComments = Array.from(document.querySelectorAll('.social__comment.hidden'));
+  const commentsToShow = hiddenComments.slice(0, commentsPerClick);
+  commentsToShow.forEach((element) => element.classList.remove('hidden'));
+
+  const visibleComments = document.querySelectorAll('.social__comment:not(.hidden)').length;
+  newText.textContent = `${ visibleComments } из `;
+
+  const commentsLen = document.querySelectorAll('.social__comment').length;
+  if (commentsLen <= visibleComments) {
+    loadMore.classList.add('hidden');
   }
 };
 
@@ -41,19 +55,10 @@ const showBigPicture = ({url, likes, comments, description}) => {
 
   commentList.append(...comments.map(makeComment));
 
-  if (comList.length >= 5) {
-    for(let i = 0; i <= 4; i++){
-      comList[i].classList.remove('hidden');
-    }
-    newText.textContent = ' 5  из ';
-  } else {
-    comList.forEach((el) => el.classList.remove('hidden'));
-    newText.textContent = `${ comList.length } из `;
-    loadMore.classList.add('hidden');
-  }
+  showMoreComments();
 
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
 
-export {showBigPicture, hideBigPictureButton, onCloseBigPicture};
+export {showBigPicture, hideBigPictureButton, onCloseBigPicture, showMoreComments};
