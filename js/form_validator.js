@@ -1,5 +1,9 @@
+import {sendData} from './api.js';
+import {showAlert} from './util.js';
+
 const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
 const uploadForm = document.querySelector('.img-upload__form');
+const uploadButton = document.querySelector('#upload-submit');
 const maxComLenght = 140;
 const space =  /\s+/;
 
@@ -26,7 +30,17 @@ const pristine = new Pristine(uploadForm, {
   errorTextTag: 'span',
   errorTextClass: 'form__error',
 });
+//
+const blockSubmitButton = () => {
+  uploadButton.disabled = true;
+  uploadButton.textContent = 'Публикую...';
+};
 
+const unblockSubmitButton = () => {
+  uploadButton.disabled = false;
+  uploadButton.textContent = 'Опубликовать';
+};
+//
 pristine.addValidator(
   uploadForm.querySelector('.text__hashtags'),
   validateHashTag,
@@ -39,8 +53,26 @@ pristine.addValidator(
   'Длина комментария не может составлять больше 140 символов'
 );
 
+const setUserFormSubmit = (onSuccess) => {
+  uploadButton.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+    }
+  });
+};
+
+export {setUserFormSubmit};
