@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
 import {showAlert} from './util.js';
+import {closeFileUpload} from './buttons.js';
 
 const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
 const uploadForm = document.querySelector('.img-upload__form');
@@ -13,6 +14,9 @@ const isDuplicate = (aray) => {
 };
 
 const validateHashTag = (val) => {
+  if (val.trim().length === 0) {
+    return true;
+  }
   const array = val.trim().toLowerCase().split(space);
   const arrayTest = array.every((value) => re.test(value));
   const arrayLenght = array.length <= 5;
@@ -30,7 +34,7 @@ const pristine = new Pristine(uploadForm, {
   errorTextTag: 'span',
   errorTextClass: 'form__error',
 });
-//
+
 const blockSubmitButton = () => {
   uploadButton.disabled = true;
   uploadButton.textContent = 'Публикую...';
@@ -40,7 +44,7 @@ const unblockSubmitButton = () => {
   uploadButton.disabled = false;
   uploadButton.textContent = 'Опубликовать';
 };
-//
+
 pristine.addValidator(
   uploadForm.querySelector('.text__hashtags'),
   validateHashTag,
@@ -53,16 +57,17 @@ pristine.addValidator(
   'Длина комментария не может составлять больше 140 символов'
 );
 
-const setUserFormSubmit = (onSuccess) => {
-  uploadButton.addEventListener('submit', (evt) => {
+const setUserFormSubmit = () => {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
+
     if (isValid) {
       blockSubmitButton();
       sendData(
         () => {
-          onSuccess();
+          closeFileUpload();
           unblockSubmitButton();
         },
         () => {
