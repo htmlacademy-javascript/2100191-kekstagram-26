@@ -77,4 +77,4 @@ const photoScale =() => {
 };
 
 
-export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale};
+export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale, closePhotoUpload};
