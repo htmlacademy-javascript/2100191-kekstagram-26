@@ -76,4 +76,5 @@ const photoScale =() => {
   uploadScale.addEventListener('click', smallerBigger);
 };
 
+
 export {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale};
