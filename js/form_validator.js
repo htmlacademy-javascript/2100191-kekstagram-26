@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
 import {showAlert} from './util.js';
-import {closeFileUpload} from './buttons.js';
+import {closePhotoUpload} from './buttons.js';
 
 const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
 const uploadForm = document.querySelector('.img-upload__form');
@@ -67,7 +67,7 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(
         () => {
-          closeFileUpload();
+          closePhotoUpload();
           unblockSubmitButton();
         },
         () => {
