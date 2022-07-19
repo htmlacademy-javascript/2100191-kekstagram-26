@@ -1,4 +1,5 @@
-import { hideBigPictureButton, onCloseBigPicture, showMoreComments} from './big-picture.js';
+import {hideBigPictureButton, onCloseBigPicture, showMoreComments} from './big-picture.js';
+import {isEscapeKey} from './util.js';
 
 const body = document.querySelector('body');
 const photoEdit = document.querySelector('.img-upload__overlay');
@@ -13,20 +14,21 @@ const imgUploadPreview = document.querySelector('.img-upload__preview');
 const sliderElement = document.querySelector('.effect-level__slider');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
 
-const closePhotoUpload = ()=> {
+const onClosePhotoUpload = (e) => {
+  if (isEscapeKey(e)) {
+    closePhotoUpload();
+  }
+};
+
+function closePhotoUpload () {
   imgUploadForm.reset();
   imgUploadPreview.className = 'img-upload__preview';
   scaleControlValue.setAttribute('value', '100%');
   imgUploadPreview.style.cssText = 'transform: scale(1)';
   photoEdit.classList.add('hidden');
   body.classList.remove('modal-open');
-};
-
-const onClosePhotoUpload = (e) => {
-  if (e.key === 'Escape') {
-    closePhotoUpload();
-  }
-};
+  document.removeEventListener('keydown', onClosePhotoUpload);
+}
 
 const smallerBigger = (evt) => {
   const value = scaleControlValue.getAttribute('value');
@@ -54,18 +56,15 @@ const initButtonHandlers = () => {
   uplFile.addEventListener('change', () => {
     photoEdit.classList.remove('hidden');
     body.classList.add('modal-open');
+
     if(changePhotoFilterForm.querySelector('.effects__radio:checked').value === 'none'){sliderElement.classList.add('hidden');}
+
     document.addEventListener('keydown', onClosePhotoUpload);
   });
 
-  uploadCancel.addEventListener('click', ()=> {
-    document.removeEventListener('keydown', onClosePhotoUpload);
-    closePhotoUpload();
-  });
+  uploadCancel.addEventListener('click', closePhotoUpload);
 
-  loadMore.addEventListener('click', () => {
-    showMoreComments();
-  });
+  loadMore.addEventListener('click', showMoreComments);
 
   uploadScale.addEventListener('click', smallerBigger);
 };
