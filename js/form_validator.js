@@ -1,11 +1,9 @@
 import {sendData} from './api.js';
-import {showAlert} from './util.js';
+import {showAlert, isEscapeKey} from './util.js';
 import {closePhotoUpload} from './buttons.js';
 
-const photoEdit = document.querySelector('.img-upload__overlay');
 const photoUploadSuccesForm = document.querySelector('#success').content.querySelector('.success');
 const photoUploadFailForm = document.querySelector('#error').content.querySelector('.error');
-const body = document.querySelector('body');
 
 const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
 const uploadForm = document.querySelector('.img-upload__form');
@@ -13,54 +11,31 @@ const uploadButton = document.querySelector('#upload-submit');
 const maxComLenght = 140;
 const space =  /\s+/;
 
-const photoSuccessUploadResult = () => {
-  const resultFormClone = photoUploadSuccesForm.cloneNode(true);
-
-  const onCloseUploadResult = (e) => {
-    if (e.key === 'Escape') {
-      resultFormClone.remove();
-    }
-  };
-  body.insertBefore(resultFormClone, body.lastChild);
-  document.addEventListener('keydown', onCloseUploadResult);
-
-  document.addEventListener('click', () => {
-    resultFormClone.remove();
-  });
-
-  const successButton = document.querySelector('.success__button');
-
-  successButton.addEventListener('click',()=> {
-    document.removeEventListener('keydown', onCloseUploadResult);
-    resultFormClone.remove();
-  });
+const onCloseUploadResult = (evt) => {
+  if (isEscapeKey(evt)) {
+    onCloseResultMessage(evt);
+  }
 };
 
-const photoFailUploadResult = () => {
-  photoEdit.classList.add('hidden');
-  body.classList.remove('modal-open');
-
-  const resultFormClone = photoUploadFailForm.cloneNode(true);
-
-  const onCloseUploadResult = (e) => {
-    if (e.key === 'Escape') {
-      resultFormClone.remove();
-    }
-  };
-
-  document.addEventListener('click', () => {
-    resultFormClone.remove();
-  });
-
-  body.insertBefore(resultFormClone, body.lastChild);
-  document.addEventListener('keydown', onCloseUploadResult);
-
-  const successButton = document.querySelector('.error__button');
-
-  successButton.addEventListener('click',()=> {
+function onCloseResultMessage(evt) {
+  if (evt.target.type === 'button' || !(evt.target.closest('.success__inner') || evt.target.closest('.success__inner'))) {
+    document.querySelectorAll('.success, .error').forEach((element) => element.remove());
     document.removeEventListener('keydown', onCloseUploadResult);
-    resultFormClone.remove();
-  });
+    document.removeEventListener('click', onCloseResultMessage);
+  }
+}
+
+const showResultMessage = (messageElement) => {
+  document.body.append(messageElement.cloneNode(true));
+  document.addEventListener('keydown', onCloseUploadResult);
+  document.addEventListener('click', onCloseResultMessage);
+};
+
+const photoSuccessUploadResult = () => showResultMessage(photoUploadSuccesForm);
+const photoFailUploadResult = () => {
+  showResultMessage(photoUploadFailForm);
+  document.querySelector('.img-upload__overlay').classList.add('hidden');
+  document.body.classList.remove('modal-open');
 };
 
 const isDuplicate = (aray) => {
