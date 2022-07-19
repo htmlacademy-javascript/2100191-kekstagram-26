@@ -13,7 +13,6 @@ const uploadButton = document.querySelector('#upload-submit');
 const maxComLenght = 140;
 const space =  /\s+/;
 
-////////////
 const photoSuccessUploadResult = () => {
   const resultFormClone = photoUploadSuccesForm.cloneNode(true);
 
@@ -36,7 +35,7 @@ const photoSuccessUploadResult = () => {
     resultFormClone.remove();
   });
 };
-////////
+
 const photoFailUploadResult = () => {
   photoEdit.classList.add('hidden');
   body.classList.remove('modal-open');
