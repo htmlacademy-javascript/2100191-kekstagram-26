@@ -13,18 +13,21 @@ const uploadButton = document.querySelector('#upload-submit');
 const maxComLenght = 140;
 const space =  /\s+/;
 
-const onCloseUploadResult = (e) => {
-  if (e.key === 'Escape') {
-    body.removeChild(body.lastChild);
-    document.removeEventListener('keydown', onCloseUploadResult);
-  }
-};
-
+////////////
 const photoSuccessUploadResult = () => {
   const resultFormClone = photoUploadSuccesForm.cloneNode(true);
 
+  const onCloseUploadResult = (e) => {
+    if (e.key === 'Escape') {
+      resultFormClone.remove();
+    }
+  };
   body.insertBefore(resultFormClone, body.lastChild);
   document.addEventListener('keydown', onCloseUploadResult);
+
+  document.addEventListener('click', () => {
+    resultFormClone.remove();
+  });
 
   const successButton = document.querySelector('.success__button');
 
@@ -33,11 +36,22 @@ const photoSuccessUploadResult = () => {
     resultFormClone.remove();
   });
 };
-
+////////
 const photoFailUploadResult = () => {
   photoEdit.classList.add('hidden');
   body.classList.remove('modal-open');
+
   const resultFormClone = photoUploadFailForm.cloneNode(true);
+
+  const onCloseUploadResult = (e) => {
+    if (e.key === 'Escape') {
+      resultFormClone.remove();
+    }
+  };
+
+  document.addEventListener('click', () => {
+    resultFormClone.remove();
+  });
 
   body.insertBefore(resultFormClone, body.lastChild);
   document.addEventListener('keydown', onCloseUploadResult);
