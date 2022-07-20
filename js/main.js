@@ -1,16 +1,18 @@
 import './form_validator.js';
-import { changePhotoFilter } from './effects_sliders.js';
-import {closeBigPicture , openPhotoEdit, closeFileUpload, loadMorePictures, photoScale} from './buttons.js';
-import {createPhotos} from './data.js';
+import {setUserFormSubmit} from './form_validator.js';
+import {changePhotoFilter} from './effects_sliders.js';
+
+import {initButtonHandlers} from './buttons.js';
+
+import {getData} from './api.js';
 import {renderPhotos} from './random_user_image.js';
+import {showAlert} from './util.js';
 
-const photos = createPhotos();
-renderPhotos(photos);
+getData((photos)=> {renderPhotos(photos);},showAlert);
 
+initButtonHandlers();
 
-closeBigPicture();
-openPhotoEdit();
-closeFileUpload();
-loadMorePictures();
-photoScale();
 changePhotoFilter();
+
+setUserFormSubmit();
+
