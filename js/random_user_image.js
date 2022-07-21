@@ -30,12 +30,12 @@ const renderPhotos = (photos) => {
 };
 
 const showAllPhotos = (photos) => {
-  allPhotosButton.addEventListener('click', debounce(() => {
+  allPhotosButton.addEventListener('click', () => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     allPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
     renderPhotos(photos);
-  }, RERENDER_DELAY));
+  });
 };
 
 const randomPhotos = (photos) => {
@@ -53,12 +53,12 @@ const randomPhotos = (photos) => {
 };
 
 const showRandomPhotos = (photos) => {
-  randomPhotosButton.addEventListener('click', debounce(() => {
+  randomPhotosButton.addEventListener('click', () => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     randomPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
     randomPhotos(photos);
-  }, RERENDER_DELAY));
+  });
 };
 
 const mostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
@@ -75,14 +75,20 @@ const popularPhotos = (photos) => {
 };
 
 const showMostPopularPhotos = (photos) => {
-  mostPopularPhotosButton.addEventListener('click', debounce(() => {
+  mostPopularPhotosButton.addEventListener('click', () => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     mostPopularPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
     const similarListFragment = document.createDocumentFragment();
     photos.slice().sort(mostPopularPhotos).forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
     popularPhotos(photos);
-  }, RERENDER_DELAY));
+  });
 };
 
-export {renderPhotos, showAllPhotos, showRandomPhotos, showMostPopularPhotos};
+const initListeners = (photos) => {
+  allPhotosButton.addEventListener('click', debounce(() => showAllPhotos(photos), RERENDER_DELAY));
+  randomPhotosButton.addEventListener('click', debounce(() => showRandomPhotos(photos), RERENDER_DELAY));
+  mostPopularPhotosButton.addEventListener('click', debounce(() => showMostPopularPhotos(photos), RERENDER_DELAY));
+};
+
+export {renderPhotos, initListeners};
