@@ -1,3 +1,4 @@
+const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
@@ -65,24 +66,6 @@ const effectSettings = {
   },
 };
 
-const onChangeFilter = (evt) => {
-  sliderElement.classList.remove('hidden');
-  imgUploadPreview.classList = `img-upload__preview effects__preview--${evt.target.value}`;
-  const effect = effectSettings[evt.target.value];
-  if (effect) {
-    sliderElement.noUiSlider.updateOptions(effectSettings[evt.target.value].slider);
-    return;
-  }
-
-  imgUploadPreview.style.filter = '';
-  imgUploadPreview.classList.add('effects__preview--none');
-  sliderElement.classList.add('hidden');
-};
-
-const changePhotoFilter = () => {
-  document.querySelectorAll('.effects__radio').forEach((element) => element.addEventListener('change', onChangeFilter));
-};
-
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,
@@ -114,5 +97,23 @@ sliderElement.noUiSlider.on('update', () => {
     imgUploadPreview.style.filter = `${settings.filter}(${value}${settings.units})`;
   }
 });
+
+const onChangeFilter = (evt) => {
+  sliderElement.classList.remove('hidden');
+  imgUploadPreview.classList = `img-upload__preview effects__preview--${evt.target.value}`;
+  const effect = effectSettings[evt.target.value];
+  if (effect) {
+    sliderElement.noUiSlider.updateOptions(effectSettings[evt.target.value].slider);
+    return;
+  }
+
+  imgUploadPreview.style.filter = '';
+  imgUploadPreview.classList.add('effects__preview--none');
+  sliderElement.classList.add('hidden');
+};
+
+const changePhotoFilter = () => {
+  document.querySelectorAll('.effects__radio').forEach((element) => element.addEventListener('change', onChangeFilter));
+};
 
 export {changePhotoFilter};
