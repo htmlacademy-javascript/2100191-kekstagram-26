@@ -2,14 +2,23 @@ import {sendData} from './api.js';
 import {showAlert, isEscapeKey} from './util.js';
 import {closePhotoUpload} from './buttons.js';
 
-const photoUploadSuccesForm = document.querySelector('#success').content.querySelector('.success');
-const photoUploadFailForm = document.querySelector('#error').content.querySelector('.error');
-
-const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
-const uploadForm = document.querySelector('.img-upload__form');
-const uploadButton = document.querySelector('#upload-submit');
 const maxComLenght = 140;
 const space =  /\s+/;
+const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
+
+const photoUploadSuccesForm = document.querySelector('#success').content.querySelector('.success');
+const photoUploadFailForm = document.querySelector('#error').content.querySelector('.error');
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadButton = document.querySelector('#upload-submit');
+
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__text',
+  errorClass: 'img-upload__text--invalid',
+  successClass: 'img-upload__text--valid',
+  errorTextParent: 'img-upload__text',
+  errorTextTag: 'span',
+  errorTextClass: 'form__error',
+});
 
 const onCloseUploadResult = (evt) => {
   if (isEscapeKey(evt)) {
@@ -55,15 +64,6 @@ const validateHashTag = (val) => {
 };
 
 const validateComment = (value) => value.length <= maxComLenght;
-
-const pristine = new Pristine(uploadForm, {
-  classTo: 'img-upload__text',
-  errorClass: 'img-upload__text--invalid',
-  successClass: 'img-upload__text--valid',
-  errorTextParent: 'img-upload__text',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error',
-});
 
 const blockSubmitButton = () => {
   uploadButton.disabled = true;
@@ -111,5 +111,4 @@ const setUserFormSubmit = () => {
     }
   });
 };
-
 export {setUserFormSubmit};

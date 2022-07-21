@@ -1,3 +1,5 @@
+import {isEscapeKey} from './util.js';
+
 const fullScreen = document.querySelector('.big-picture');
 const commentList = fullScreen.querySelector('.social__comments');
 const commentTemplate = commentList.querySelector('.social__comment');
@@ -15,12 +17,12 @@ const hideBigPictureButton = ()=> {
 };
 
 const onCloseBigPicture = (e) => {
-  if (e.key === 'Escape') {
+  if (isEscapeKey(e)) {
     hideBigPictureButton();
   }
 };
 
-const showMoreComments = () => {
+const onShowMoreComments = () => {
   const hiddenComments = Array.from(document.querySelectorAll('.social__comment.hidden'));
   const commentsToShow = hiddenComments.slice(0, commentsPerClick);
   commentsToShow.forEach((element) => element.classList.remove('hidden'));
@@ -55,10 +57,10 @@ const showBigPicture = ({url, likes, comments, description}) => {
 
   commentList.append(...comments.map(makeComment));
 
-  showMoreComments();
+  onShowMoreComments();
 
   body.classList.add('modal-open');
   fullScreen.classList.remove('hidden');
 };
 
-export {showBigPicture, hideBigPictureButton, onCloseBigPicture, showMoreComments};
+export {showBigPicture, hideBigPictureButton, onCloseBigPicture, onShowMoreComments};

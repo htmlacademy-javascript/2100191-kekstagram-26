@@ -3,28 +3,6 @@ const valueElement = document.querySelector('.effect-level__value');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 0.5,
-  step: 0.1,
-  connect: 'lower',
-  format: {
-    to: function (value) {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
-    },
-    from: function (value) {
-      return parseFloat(value);
-    },
-  },
-});
-
-
 const effectSettings = {
   chrome:{
     slider: {
@@ -88,6 +66,27 @@ const effectSettings = {
   },
 };
 
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 1,
+  },
+  start: 0.5,
+  step: 0.1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
 sliderElement.noUiSlider.on('update', () => {
   const value = sliderElement.noUiSlider.get();
   valueElement.setAttribute('value', value);
@@ -98,8 +97,8 @@ sliderElement.noUiSlider.on('update', () => {
     imgUploadPreview.style.filter = `${settings.filter}(${value}${settings.units})`;
   }
 });
-//перемены
-const changeFilter = (evt) => {
+
+const onChangeFilter = (evt) => {
   sliderElement.classList.remove('hidden');
   imgUploadPreview.classList = `img-upload__preview effects__preview--${evt.target.value}`;
   const effect = effectSettings[evt.target.value];
@@ -114,7 +113,7 @@ const changeFilter = (evt) => {
 };
 
 const changePhotoFilter = () => {
-  document.querySelectorAll('.effects__radio').forEach((element) => element.addEventListener('change', changeFilter));
+  document.querySelectorAll('.effects__radio').forEach((element) => element.addEventListener('change', onChangeFilter));
 };
 
 export {changePhotoFilter};
