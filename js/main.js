@@ -6,14 +6,12 @@ import {changePhotoFilter} from './effects_sliders.js';
 import {initButtonHandlers} from './buttons.js';
 
 import {getData} from './api.js';
-import {renderPhotos, showAllPhotos, showRandomPhotos, showMostPopularPhotos} from './random_user_image.js';
+import {renderPhotos, initListeners} from './random_user_image.js';
 import {showAlert} from './util.js';
 
 getData((photos)=> {
   renderPhotos(photos);
-  showRandomPhotos(photos);
-  showAllPhotos(photos);
-  showMostPopularPhotos(photos);
+  initListeners(photos);
 },
 showAlert);
 
