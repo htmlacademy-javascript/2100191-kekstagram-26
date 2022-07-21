@@ -11,6 +11,15 @@ const photoUploadFailForm = document.querySelector('#error').content.querySelect
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadButton = document.querySelector('#upload-submit');
 
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__text',
+  errorClass: 'img-upload__text--invalid',
+  successClass: 'img-upload__text--valid',
+  errorTextParent: 'img-upload__text',
+  errorTextTag: 'span',
+  errorTextClass: 'form__error',
+});
+
 const onCloseUploadResult = (evt) => {
   if (isEscapeKey(evt)) {
     onCloseResultMessage(evt);
@@ -65,15 +74,6 @@ const unblockSubmitButton = () => {
   uploadButton.disabled = false;
   uploadButton.textContent = 'Опубликовать';
 };
-
-const pristine = new Pristine(uploadForm, {
-  classTo: 'img-upload__text',
-  errorClass: 'img-upload__text--invalid',
-  successClass: 'img-upload__text--valid',
-  errorTextParent: 'img-upload__text',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error',
-});
 
 pristine.addValidator(
   uploadForm.querySelector('.text__hashtags'),
