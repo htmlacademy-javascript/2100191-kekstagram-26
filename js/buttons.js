@@ -1,4 +1,4 @@
-import {hideBigPictureButton, onCloseBigPicture, showMoreComments} from './big-picture.js';
+import {hideBigPictureButton, onCloseBigPicture, onShowMoreComments} from './big-picture.js';
 import {isEscapeKey} from './util.js';
 
 const body = document.querySelector('body');
@@ -14,8 +14,9 @@ const imgUploadPreview = document.querySelector('.img-upload__preview');
 const sliderElement = document.querySelector('.effect-level__slider');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
 
+
 const onClosePhotoUpload = (e) => {
-  if (isEscapeKey(e)) {
+  if (isEscapeKey(e) || e.type === 'click') {
     closePhotoUpload();
   }
 };
@@ -30,7 +31,7 @@ function closePhotoUpload () {
   document.removeEventListener('keydown', onClosePhotoUpload);
 }
 
-const smallerBigger = (evt) => {
+const onChangeSmallerBigger = (evt) => {
   const value = scaleControlValue.getAttribute('value');
   const cleanValue = value.replace(/\D/g,'');
   if (evt.target.closest('.scale__control--smaller')) {
@@ -57,15 +58,19 @@ const initButtonHandlers = () => {
     photoEdit.classList.remove('hidden');
     body.classList.add('modal-open');
 
-    if(changePhotoFilterForm.querySelector('.effects__radio:checked').value === 'none'){sliderElement.classList.add('hidden');}
+    if(changePhotoFilterForm.querySelector('.effects__radio:checked').value === 'none'){
+      sliderElement.classList.add('hidden');
+    }
 
     document.addEventListener('keydown', onClosePhotoUpload);
   });
 
   uploadCancel.addEventListener('click', closePhotoUpload);
 
-  loadMore.addEventListener('click', showMoreComments);
+  loadMore.addEventListener('click', onShowMoreComments);
 
-  uploadScale.addEventListener('click', smallerBigger);
+  uploadScale.addEventListener('click', onChangeSmallerBigger);
 };
+
+
 export {initButtonHandlers, closePhotoUpload};
