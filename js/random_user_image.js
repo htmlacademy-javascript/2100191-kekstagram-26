@@ -1,14 +1,14 @@
 import {showBigPicture} from './big-picture.js';
 import {debounce} from './util.js';
 
+const RERENDER_DELAY = 500;
+
 const picturesElement = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
 
 const allPhotosButton = document.querySelector('#filter-default');
 const randomPhotosButton = document.querySelector('#filter-random');
 const mostPopularPhotosButton = document.querySelector('#filter-discussed');
-
-const RERENDER_DELAY = 500;
 
 const makePhotoElement = (photo) => {
   const {url, likes, comments} = photo;
@@ -30,12 +30,12 @@ const renderPhotos = (photos) => {
 };
 
 const showAllPhotos = (photos) => {
-  allPhotosButton.addEventListener('click', ()=>{
+  allPhotosButton.addEventListener('click', debounce(() => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     allPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
     renderPhotos(photos);
-  });
+  }, RERENDER_DELAY));
 };
 
 const randomPhotos = (photos) => {
@@ -53,22 +53,15 @@ const randomPhotos = (photos) => {
 };
 
 const showRandomPhotos = (photos) => {
-  randomPhotosButton.addEventListener('click', ()=>{
+  randomPhotosButton.addEventListener('click', debounce(() => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     randomPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
-    //randomPhotos(photos);
-    debounce(() => randomPhotos(photos),RERENDER_DELAY,);
-  });
+    randomPhotos(photos);
+  }, RERENDER_DELAY));
 };
 
-const mostPopularPhotos =(a, b) => {
-  if(a.comments.length > b.comments.length) {
-    return -1;
-  } else {
-    return 1;
-  }
-};
+const mostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
 
 const popularPhotos = (photos) => {
   const similarListFragment = document.createDocumentFragment();
@@ -82,12 +75,14 @@ const popularPhotos = (photos) => {
 };
 
 const showMostPopularPhotos = (photos) => {
-  mostPopularPhotosButton.addEventListener('click', ()=>{
+  mostPopularPhotosButton.addEventListener('click', debounce(() => {
     document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     mostPopularPhotosButton.classList.add('img-filters__button--active');
     document.querySelectorAll('.picture').forEach((e) => e.remove());
+    const similarListFragment = document.createDocumentFragment();
+    photos.slice().sort(mostPopularPhotos).forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
     popularPhotos(photos);
-  });
+  }, RERENDER_DELAY));
 };
 
 export {renderPhotos, showAllPhotos, showRandomPhotos, showMostPopularPhotos};
