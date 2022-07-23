@@ -23,7 +23,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const debounce = (callback, timeoutDelay) => {
+const functionDebounceHandler = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
@@ -32,4 +32,5 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {showAlert, debounce, isEscapeKey};
+export {showAlert, functionDebounceHandler, isEscapeKey};
+
