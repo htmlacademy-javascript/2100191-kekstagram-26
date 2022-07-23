@@ -1,4 +1,4 @@
-import {debounce} from './util.js';
+import {functionDebounceHandler} from './util.js';
 import {renderPhotos, makePhotoElement} from './render_user_image.js';
 
 const RERENDER_DELAY = 500;
@@ -59,9 +59,9 @@ const showMostPopularPhotos = (photos) => {
 
 
 const initListeners = (photos) => {
-  allPhotosButton.addEventListener('click', debounce(() => showAllPhotos(photos), RERENDER_DELAY));
-  randomPhotosButton.addEventListener('click', debounce(() => showRandomPhotos(photos), RERENDER_DELAY));
-  mostPopularPhotosButton.addEventListener('click', debounce(() => showMostPopularPhotos(photos), RERENDER_DELAY));
+  allPhotosButton.addEventListener('click', functionDebounceHandler(() => showAllPhotos(photos), RERENDER_DELAY));
+  randomPhotosButton.addEventListener('click', functionDebounceHandler(() => showRandomPhotos(photos), RERENDER_DELAY));
+  mostPopularPhotosButton.addEventListener('click', functionDebounceHandler(() => showMostPopularPhotos(photos), RERENDER_DELAY));
 };
 
 export {initListeners};
