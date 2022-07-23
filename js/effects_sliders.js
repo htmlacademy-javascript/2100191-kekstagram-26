@@ -1,7 +1,8 @@
+const sliderForm = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
-const imgUploadPreview = document.querySelector('.img-upload__preview');
+const userPic = document.querySelector('.setup-user-pic');
 
 const effectSettings = {
   chrome:{
@@ -94,22 +95,22 @@ sliderElement.noUiSlider.on('update', () => {
 
   const settings = effectSettings[selectedFilter];
   if(settings) {
-    imgUploadPreview.style.filter = `${settings.filter}(${value}${settings.units})`;
+    userPic.style.filter = `${settings.filter}(${value}${settings.units})`;
   }
 });
 
 const onChangeFilter = (evt) => {
-  sliderElement.classList.remove('hidden');
-  imgUploadPreview.classList = `img-upload__preview effects__preview--${evt.target.value}`;
+  sliderForm.classList.remove('hidden');
+  userPic.classList = `img-upload__preview effects__preview--${evt.target.value}`;
   const effect = effectSettings[evt.target.value];
   if (effect) {
     sliderElement.noUiSlider.updateOptions(effectSettings[evt.target.value].slider);
     return;
   }
 
-  imgUploadPreview.style.filter = '';
-  imgUploadPreview.classList.add('effects__preview--none');
-  sliderElement.classList.add('hidden');
+  userPic.style.filter = '';
+  userPic.classList.add('effects__preview--none');
+  sliderForm.classList.add('hidden');
 };
 
 const changePhotoFilter = () => {
