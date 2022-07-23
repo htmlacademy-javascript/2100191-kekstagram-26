@@ -6,8 +6,10 @@ import {changePhotoFilter} from './effects_sliders.js';
 import {initButtonHandlers} from './buttons.js';
 
 import {getData} from './api.js';
-import {renderPhotos, initListeners} from './random_user_image.js';
+import {renderPhotos} from './render_user_image.js';
+import {initListeners} from './users_photos_filters.js';
 import {showAlert} from './util.js';
+
 
 getData((photos)=> {
   renderPhotos(photos);
