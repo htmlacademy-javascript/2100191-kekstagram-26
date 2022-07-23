@@ -54,12 +54,12 @@ const onChangeSmallerBigger = (evt) => {
 };
 
 const initButtonHandlers = () => {
-  pictureCancel.addEventListener('click', function onPictureCancel () {
+  pictureCancel.addEventListener('click', () => {
     hideBigPictureButton();
     document.removeEventListener('keydown', onCloseBigPicture);
   });
 
-  uplFile.addEventListener('change', function onUploadFile () {
+  uplFile.addEventListener('change', () => {
     photoEdit.classList.remove('hidden');
     body.classList.add('modal-open');
 
@@ -79,3 +79,4 @@ const initButtonHandlers = () => {
 
 
 export {initButtonHandlers, photoUploadCloseHandler};
+
