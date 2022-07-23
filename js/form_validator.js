@@ -66,9 +66,9 @@ const validateHashTag = (val) => {
   }
   const cleanHashTag = val.trim().toLowerCase().split(space);
   const hashTagsValidity = cleanHashTag.every((value) => re.test(value));
-  const HashTagLength = cleanHashTag.length <= MAX_HASHTAGS;
+  const hashTagLength = cleanHashTag.length <= MAX_HASHTAGS;
 
-  return hashTagsValidity === HashTagLength === isDuplicate(cleanHashTag);
+  return hashTagsValidity === hashTagLength === isDuplicate(cleanHashTag);
 };
 
 const validateComment = (value) => value.length <= MAX_COM_LENGHT;
