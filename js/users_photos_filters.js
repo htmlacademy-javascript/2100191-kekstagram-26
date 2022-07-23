@@ -17,11 +17,9 @@ const onPhotoFilterChange = () => {
 };
 
 const showAllPhotos = (photos) => {
-  allPhotosButton.addEventListener('click', function onShowAllPhotosButtonClick () {
-    onPhotoFilterChange();
-    allPhotosButton.classList.add('img-filters__button--active');
-    renderPhotos(photos);
-  });
+  onPhotoFilterChange();
+  allPhotosButton.classList.add('img-filters__button--active');
+  renderPhotos(photos);
 };
 
 const randomPhotos = (photos) => {
@@ -35,11 +33,9 @@ const randomPhotos = (photos) => {
 };
 
 const showRandomPhotos = (photos) => {
-  randomPhotosButton.addEventListener('click', function onRandomPhotosButtonClick () {
-    onPhotoFilterChange();
-    randomPhotosButton.classList.add('img-filters__button--active');
-    randomPhotos(photos);
-  });
+  onPhotoFilterChange();
+  randomPhotosButton.classList.add('img-filters__button--active');
+  randomPhotos(photos);
 };
 
 const mostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
@@ -56,11 +52,9 @@ const popularPhotos = (photos) => {
 };
 
 const showMostPopularPhotos = (photos) => {
-  mostPopularPhotosButton.addEventListener('click', function onMostPopularPhotosButtonClick () {
-    onPhotoFilterChange();
-    mostPopularPhotosButton.classList.add('img-filters__button--active');
-    popularPhotos(photos);
-  });
+  onPhotoFilterChange();
+  mostPopularPhotosButton.classList.add('img-filters__button--active');
+  popularPhotos(photos);
 };
 
 
