@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 import {sendData} from './api.js';
 import {showAlert, isEscapeKey} from './util.js';
 import {photoUploadCloseHandler} from './buttons.js';
@@ -57,7 +58,7 @@ const showFailPhotoUploadResult = () => {
 
 const isDuplicate = (aray) => {
   const duplicateTestArray = new Set(aray);
-  if (duplicateTestArray.size === aray.length){ return false;}
+  return duplicateTestArray.size === aray.length;
 };
 
 const validateHashTag = (val) => {
@@ -66,9 +67,9 @@ const validateHashTag = (val) => {
   }
   const cleanHashTag = val.trim().toLowerCase().split(space);
   const hashTagsValidity = cleanHashTag.every((value) => re.test(value));
-  const HashTagLenght = val <= MAX_HASHTAGS;
+  const HashTagLength = cleanHashTag.length <= MAX_HASHTAGS;
 
-  return hashTagsValidity === HashTagLenght === isDuplicate(cleanHashTag);
+  return hashTagsValidity === HashTagLength === isDuplicate(cleanHashTag);
 };
 
 const validateComment = (value) => value.length <= MAX_COM_LENGHT;
