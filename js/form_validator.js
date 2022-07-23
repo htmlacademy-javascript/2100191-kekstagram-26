@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow-callback */
 import {sendData} from './api.js';
 import {showAlert, isEscapeKey} from './util.js';
 import {photoUploadCloseHandler} from './buttons.js';
