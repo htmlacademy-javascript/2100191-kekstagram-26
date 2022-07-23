@@ -91,7 +91,7 @@ pristine.addValidator(
 );
 
 const setUserFormSubmit = () => {
-  uploadForm.addEventListener('submit', function onFormUpload (evt) {
+  uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
@@ -115,4 +115,5 @@ const setUserFormSubmit = () => {
     }
   });
 };
+
 export {setUserFormSubmit};
