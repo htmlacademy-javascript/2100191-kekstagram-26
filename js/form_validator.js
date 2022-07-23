@@ -1,8 +1,14 @@
 import {sendData} from './api.js';
 import {showAlert, isEscapeKey} from './util.js';
-import {closePhotoUpload} from './buttons.js';
+import {photoUploadCloseHandler} from './buttons.js';
 
-const maxComLenght = 140;
+const MAX_COM_LENGHT = 140;
+const MAX_HASHTAGS = 5;
+const ON_FORM_UPLOAD_TEXT = 'Публикую...';
+const FORM_UPLOAD_TEXT = 'Опубликовать';
+const WRONG_HASHTAG_TEXT = 'Недопустимый формат хэш-тега';
+const WRONG_DESCRIPTION_TEXT = 'Длина комментария не может составлять больше 140 символов';
+
 const space =  /\s+/;
 const re = /^#[A-Za-zA-Яа-я0-9]{1,20}$/;
 
@@ -10,6 +16,8 @@ const photoUploadSuccesForm = document.querySelector('#success').content.querySe
 const photoUploadFailForm = document.querySelector('#error').content.querySelector('.error');
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadButton = document.querySelector('#upload-submit');
+const hashtagsText = uploadForm.querySelector('.text__hashtags');
+const descriptionText = uploadForm.querySelector('.text__description');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__text',
@@ -40,71 +48,67 @@ const showResultMessage = (messageElement) => {
   document.addEventListener('click', onCloseResultMessage);
 };
 
-const photoSuccessUploadResult = () => showResultMessage(photoUploadSuccesForm);
-const photoFailUploadResult = () => {
+const showSuccessPhotoUploadResult = () => showResultMessage(photoUploadSuccesForm);
+const showFailPhotoUploadResult = () => {
   showResultMessage(photoUploadFailForm);
   document.querySelector('.img-upload__overlay').classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
 const isDuplicate = (aray) => {
-  const s = new Set(aray);
-  return s.size === aray.length;
+  const duplicateTestArray = new Set(aray);
+  if (duplicateTestArray.size === aray.length){ return false;}
 };
 
 const validateHashTag = (val) => {
   if (val.trim().length === 0) {
     return true;
   }
-  const array = val.trim().toLowerCase().split(space);
-  const arrayTest = array.every((value) => re.test(value));
-  const arrayLenght = array.length <= 5;
+  const cleanHashTag = val.trim().toLowerCase().split(space);
+  const hashTagsValidity = cleanHashTag.every((value) => re.test(value));
+  const HashTagLenght = val <= MAX_HASHTAGS;
 
-  return arrayTest === arrayLenght === isDuplicate(array);
+  return hashTagsValidity === HashTagLenght === isDuplicate(cleanHashTag);
 };
 
-const validateComment = (value) => value.length <= maxComLenght;
+const validateComment = (value) => value.length <= MAX_COM_LENGHT;
 
-const blockSubmitButton = () => {
-  uploadButton.disabled = true;
-  uploadButton.textContent = 'Публикую...';
-};
-
-const unblockSubmitButton = () => {
+const unBlockSubmitButton = () => {
   uploadButton.disabled = false;
-  uploadButton.textContent = 'Опубликовать';
+  uploadButton.textContent = FORM_UPLOAD_TEXT;
 };
 
 pristine.addValidator(
-  uploadForm.querySelector('.text__hashtags'),
+  hashtagsText,
   validateHashTag,
-  'Недопустимый формат хэш-тега'
+  WRONG_HASHTAG_TEXT
 );
 
 pristine.addValidator(
-  uploadForm.querySelector('.text__description'),
+  descriptionText,
   validateComment,
-  'Длина комментария не может составлять больше 140 символов'
+  WRONG_DESCRIPTION_TEXT
 );
 
 const setUserFormSubmit = () => {
-  uploadForm.addEventListener('submit', (evt) => {
+  uploadForm.addEventListener('submit', function onFormUpload (evt) {
     evt.preventDefault();
 
     const isValid = pristine.validate();
 
     if (isValid) {
-      blockSubmitButton();
+      uploadButton.disabled = true;
+      uploadButton.textContent = ON_FORM_UPLOAD_TEXT;
       sendData(
         () => {
-          closePhotoUpload();
-          unblockSubmitButton();
-          photoSuccessUploadResult();
+          photoUploadCloseHandler();
+          unBlockSubmitButton();
+          showSuccessPhotoUploadResult();
         },
         () => {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-          unblockSubmitButton();
-          photoFailUploadResult();
+          unBlockSubmitButton();
+          showFailPhotoUploadResult();
         },
         new FormData(evt.target),
       );
