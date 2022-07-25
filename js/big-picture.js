@@ -46,7 +46,7 @@ const makeComment = ({avatar, name, message}) => {
   return socialComment;
 };
 
-const showBigPicture = ({url, likes, comments, description}) => {
+const onBigPictureClick = ({url, likes, comments, description}) => {
   commentList.innerHTML = '';
   document.addEventListener('keydown', onCloseBigPicture);
 
@@ -63,4 +63,4 @@ const showBigPicture = ({url, likes, comments, description}) => {
   fullScreen.classList.remove('hidden');
 };
 
-export {showBigPicture, hideBigPictureButton, onCloseBigPicture, onShowMoreComments};
+export {onBigPictureClick, hideBigPictureButton, onCloseBigPicture, onShowMoreComments};
