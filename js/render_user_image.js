@@ -1,4 +1,4 @@
-import {showBigPicture} from './big-picture.js';
+import {onBigPictureClick} from './big-picture.js';
 
 const picturesElement = document.querySelector('.pictures');
 const templateFragment = document.querySelector('#picture').content.querySelector('.picture');
@@ -10,7 +10,7 @@ const makePhotoElement = (photo) => {
   pictureElement.querySelector('.picture__img').setAttribute('src', url);
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.addEventListener('click', ()=>{showBigPicture(photo);});
+  pictureElement.addEventListener('click', ()=>{onBigPictureClick(photo);});
   return pictureElement;
 };
 
