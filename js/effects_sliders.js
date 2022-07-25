@@ -101,13 +101,11 @@ sliderElement.noUiSlider.on('update', () => {
 
 const onChangeFilter = (evt) => {
   sliderForm.classList.remove('hidden');
-  userPic.classList = `img-upload__preview effects__preview--${evt.target.value}`;
   const effect = effectSettings[evt.target.value];
   if (effect) {
     sliderElement.noUiSlider.updateOptions(effectSettings[evt.target.value].slider);
     return;
   }
-
   userPic.style.filter = '';
   userPic.classList.add('effects__preview--none');
   sliderForm.classList.add('hidden');
