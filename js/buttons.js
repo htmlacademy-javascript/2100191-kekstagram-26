@@ -14,7 +14,6 @@ const uploadCancel = document.querySelector('.img-upload__cancel');
 const loadMore = document.querySelector('.comments-loader');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const uploadScale = document.querySelector('.img-upload__scale');
-const imgUploadPreview = document.querySelector('.img-upload__preview');
 const userPic = document.querySelector('.setup-user-pic');
 const sliderForm = document.querySelector('.img-upload__effect-level');
 const changePhotoFilterForm = document.querySelector('.img-upload__effects');
@@ -28,9 +27,9 @@ const onClosePhotoUpload = (e) => {
 
 function photoUploadCloseHandler () {
   imgUploadForm.reset();
-  imgUploadPreview.className = 'img-upload__preview';
   scaleControlValue.setAttribute('value', '100%');
-  imgUploadPreview.style.cssText = 'transform: scale(1)';
+  userPic.style.cssText = 'transform: scale(1)';
+  userPic.style.filter = '';
   photoEdit.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onClosePhotoUpload);
