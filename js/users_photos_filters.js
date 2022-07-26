@@ -38,14 +38,14 @@ const showRandomPhotos = (photos) => {
   createRandomPhotos(photos);
 };
 
-const mostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
+const filterMostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
 
 const createMostPopularPhotosList = (photos) => {
   const similarListFragment = document.createDocumentFragment();
 
   photos
     .slice()
-    .sort(mostPopularPhotos)
+    .sort(filterMostPopularPhotos)
     .forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
 
   picturesElement.appendChild(similarListFragment);
