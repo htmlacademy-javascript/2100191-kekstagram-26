@@ -28,7 +28,7 @@ const onClosePhotoUpload = (e) => {
 function photoUploadCloseHandler () {
   imgUploadForm.reset();
   scaleControlValue.setAttribute('value', '100%');
-  userPic.style.cssText = 'transform: scale(1)';
+  userPic.style.transform = 'scale(1)';
   userPic.style.filter = '';
   photoEdit.classList.add('hidden');
   body.classList.remove('modal-open');
