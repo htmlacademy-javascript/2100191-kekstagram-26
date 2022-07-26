@@ -107,7 +107,6 @@ const onChangeFilter = (evt) => {
     return;
   }
   userPic.style.filter = '';
-  userPic.classList.add('effects__preview--none');
   sliderForm.classList.add('hidden');
 };
 
