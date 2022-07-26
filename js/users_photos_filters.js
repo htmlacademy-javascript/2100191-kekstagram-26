@@ -22,7 +22,7 @@ const showAllPhotos = (photos) => {
   renderPhotos(photos);
 };
 
-const randomPhotos = (photos) => {
+const createRandomPhotos = (photos) => {
   const similarListFragment = document.createDocumentFragment();
 
   const shuffledPhotos = photos.sort(() => Math.random() - Math.random()).slice(0, RANDOM_PHOTOS_ON_PAGE);
@@ -35,17 +35,17 @@ const randomPhotos = (photos) => {
 const showRandomPhotos = (photos) => {
   onPhotoFilterChange();
   randomPhotosButton.classList.add('img-filters__button--active');
-  randomPhotos(photos);
+  createRandomPhotos(photos);
 };
 
-const mostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
+const filterMostPopularPhotos =(a, b) => (a.comments.length > b.comments.length) ? -1 : 1;
 
-const popularPhotos = (photos) => {
+const createMostPopularPhotosList = (photos) => {
   const similarListFragment = document.createDocumentFragment();
 
   photos
     .slice()
-    .sort(mostPopularPhotos)
+    .sort(filterMostPopularPhotos)
     .forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
 
   picturesElement.appendChild(similarListFragment);
@@ -54,7 +54,7 @@ const popularPhotos = (photos) => {
 const showMostPopularPhotos = (photos) => {
   onPhotoFilterChange();
   mostPopularPhotosButton.classList.add('img-filters__button--active');
-  popularPhotos(photos);
+  createMostPopularPhotosList(photos);
 };
 
 
