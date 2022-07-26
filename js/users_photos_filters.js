@@ -25,7 +25,7 @@ const showAllPhotos = (photos) => {
 const createRandomPhotos = (photos) => {
   const similarListFragment = document.createDocumentFragment();
 
-  const shuffledPhotos = photos.sort(() => Math.random() - Math.random()).slice(0, RANDOM_PHOTOS_ON_PAGE);
+  const shuffledPhotos = photos.slice().sort(() => Math.random() - Math.random()).slice(0, RANDOM_PHOTOS_ON_PAGE);
 
   shuffledPhotos.forEach((photo) => similarListFragment.appendChild(makePhotoElement(photo)));
 
